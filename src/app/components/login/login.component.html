@@ -1,0 +1,99 @@
+<div class="container bg-main-light show rounded-4 px-5 my-5 overflow-hidden">
+  <h1 class="h2 text-main my-5">Login Now:</h1>
+
+  <form [formGroup]="login" (ngSubmit)="loginForm()">
+    <div class="row px-2 gy-3">
+      <div class="col-md-12 mb-3">
+        <div class="dash-input-wrapper mb-30">
+          <label for="email" class="mb-30">Email*</label>
+          <input
+            class="form-control"
+            type="email"
+            placeholder="Enter your email..."
+            id="email"
+            formControlName="email"
+            [ngClass]="{
+              'is-valid':
+                !login.get('email')?.errors &&
+                (login.get('email')?.touched || login.get('email')?.dirty),
+              'is-invalid':
+                login.get('email')?.errors &&
+                (login.get('email')?.touched || login.get('email')?.dirty)
+            }"
+          />
+        </div>
+        @if
+        (login.get('email')?.errors&&(login.get('email')?.touched||login.get('email')?.dirty))
+        {
+        <div class="alert alert-danger my-1">
+          @if (login.get('email')?.getError('required')) {
+          <p class="m-0">Email is Required</p>
+          } @else if (login.get('email')?.getError('email')) {
+          <p class="m-0">This Email is not Vaild, Please Enter Valid Email</p>
+
+          }
+        </div>
+        }
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <div class="dash-input-wrapper mb-30">
+          <label for="password" class="mb-30">Password*</label>
+          <input
+            class="form-control"
+            type="password"
+            placeholder="Enter your password..."
+            id="password"
+            formControlName="password"
+            [ngClass]="{
+              'is-valid':
+                !login.get('password')?.errors &&
+                (login.get('password')?.touched ||
+                  login.get('password')?.dirty),
+              'is-invalid':
+                login.get('password')?.errors &&
+                (login.get('password')?.touched || login.get('password')?.dirty)
+            }"
+          />
+        </div>
+        @if
+        (login.get('password')?.errors&&(login.get('password')?.touched||login.get('password')?.dirty))
+        {
+        <div class="alert alert-danger my-1">
+          @if (login.get('password')?.getError('required')) {
+          <p class="m-0">Password is Required</p>
+          } @else if (login.get('password')?.getError('pattern')) {
+          <p class="m-0">Password must be at least 6 chars.</p>
+
+          }
+        </div>
+        }
+      </div>
+    </div>
+    <a routerLink="/forgetPassword" class="text-main"
+      >Do You Forget Password?</a
+    >
+    <button
+      [disabled]="login.invalid || isLoading"
+      class="btn-main ms-auto d-block mb-3"
+    >
+      login @if (isLoading) {
+      <span><i class="fa-solid fa-spin fa-spinner"></i></span>
+      }
+    </button>
+
+    @if(msgError){
+    <div class="position-fixed top-0 end-0 start-0 bottom-0">
+      <p class="alert alert-danger w-50 m-auto mb-2 error">
+        {{ msgError }}
+      </p>
+    </div>
+    } @if(msgSuccess){
+    <div class="position-fixed top-0 end-0 start-0 bottom-0">
+      <p class="alert alert-success w-50 m-auto mb-2 error">
+        Your Login is Success.
+      </p>
+    </div>
+    }
+  </form>
+</div>

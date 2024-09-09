@@ -1,0 +1,49 @@
+<section class="bg-main-light rounded-4 shadow p-4 my-3 w-75 mx-auto">
+  <div class="d-flex align-items-center justify-content-between">
+    <h1 class="h3 text-main">Shop Cart</h1>
+    <button class="btn btn-outline-danger btn-sm" (click)="deleteAllCart()">
+      Clear Cart
+    </button>
+  </div>
+  <p class="text-capitalize">
+    Total cart Price : {{ cartProduct.totalCartPrice | currency : "GBP" }}
+  </p>
+  @for (cart of cartProduct.products; track cart.product._id) {
+  <div class="row border-bottom">
+    <div class="col-md-1">
+      <div class="inner">
+        <img
+          [src]="cart.product.imageCover"
+          class="w-100"
+          [alt]="cart.product.title"
+        />
+      </div>
+    </div>
+    <div class="col-md-11 d-flex align-items-center justify-content-between">
+      <div class="details">
+        <h3 class="h5">{{ cart.product.title }}</h3>
+        <p class="text-main m-0">price : {{ cart.price }}</p>
+        <span class="text-danger delete" (click)="deleteItem(cart.product._id)"
+          ><i class="fa-solid fa-trash me-2"></i>Remove</span
+        >
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <span
+          class="text-main"
+          (click)="updateCount(cart.product._id, cart.count + 1)"
+          ><i class="fa-solid fa-circle-plus fa-xl"></i
+        ></span>
+        <span>{{ cart.count }}</span>
+        <span
+          class="text-main"
+          (click)="updateCount(cart.product._id, cart.count - 1)"
+          ><i class="fa-solid fa-circle-minus fa-xl"></i
+        ></span>
+      </div>
+    </div>
+  </div>
+  }
+  <button class="btn-main mt-2" [routerLink]="['/orders', cartProduct._id]">
+    Order
+  </button>
+</section>

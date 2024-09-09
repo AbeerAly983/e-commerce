@@ -1,0 +1,17 @@
+<section>
+  <h2 class="text-center text-main">All Brands</h2>
+  <div class="row g-3">
+    @for (brand of brandsList; track brand._id) {
+
+    <div class="col-md-3">
+      <div class="product px-2 py-4">
+        <div>
+          <h2 class="text-black text-center">{{ brand.name }}</h2>
+          <h3 class="h6 text-center">{{ brand.name }}</h3>
+        </div>
+      </div>
+    </div>
+
+    }
+  </div>
+</section>

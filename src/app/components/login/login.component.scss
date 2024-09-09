@@ -1,0 +1,21 @@
+
+::placeholder{
+  font-weight: 600;
+  color: #8b8b8b;
+  font-size: 12px;
+}
+.clear{
+  clear: both;
+}
+
+.error{
+  min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
